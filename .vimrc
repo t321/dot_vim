@@ -29,6 +29,12 @@ set nocompatible               " be iMproved
  
 let g:vimwiki_list = [{'path': '/home/juanantonio/Dropbox/vimwiki', 'path_html': '~/public_html/'}]
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mapeo de F2 para NerdTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F2> :NERDTreeToggle<CR>
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
