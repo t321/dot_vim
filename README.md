@@ -2,10 +2,10 @@
 Basic configuration for my VIM.
 
 ##Instalation
-* `git clone http://github.com/mutewinter/dot_vim.git ~/dot_vim`.
+* `git clone http://github.com/t321/dot_vim.git ~/dot_vim`.
 * `cd ~/dot_vim`.
-* `chmod +x install`.
-* `./install`.
+* `chmod +x install_dot_files`.
+* `./install_dot_files`.
 
 ##Plugins
 * [vundle](https://github.com/gmarik/Vundle.vim) - Vundle, the plug-in manager for Vim.
