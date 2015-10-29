@@ -9,5 +9,17 @@ if [ ! -a ~/.vimrc ]; then ln -s $(pwd)/.vimrc ~/.vimrc > /dev/null 2>&1; fi
 echo "Create vim configuration folder (If doesn't exists)"
 if [ ! -d ~/.vim ]; then ln -s $(pwd)/.vim ~/.vim > /dev/null 2>&1; fi
 
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' git|grep "install ok installed")
+echo "Checking for somelib: "$PKG_OK
+if [ "" == "$PKG_OK" ]; then
+  echo "No somelib. Setting up somelib."
+  sudo apt-get --force-yes --yes install git
+fi
+
+echo "Downloading Vundle for vim"
+if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+    git clone "https://github.com/VundleVim/Vundle.vim.git" ~/.vim/bundle/Vundle.vim
+fi
+
 echo "Create zsh configuration file (If doesn't exists)"
 if [ ! -a ~/.zshrc ]; then ln -s $(pwd)/.zshrc ~/.zshrc > /dev/null 2>&1; fi
