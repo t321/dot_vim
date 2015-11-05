@@ -75,4 +75,4 @@ export PATH="/home/juanantonio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # User specific aliases and functions
-export ANSIBLE_HOSTS=/etc/ansible/ansible_hosts
+export ANSIBLE_HOSTS=/etc/ansible/hosts
