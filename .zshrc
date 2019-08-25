@@ -1,12 +1,14 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export SBT_OPTS="-Xmx2G"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="jreese"
-ZSH_THEME="bira"
+
+ZSH_THEME="xiong-chiamiov-plus"
+
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -49,13 +51,13 @@ ZSH_THEME="bira"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git command-not-found ubuntu tmux vagrant pip supervisor sudo docker docker-compose tmuxinator)
+plugins=(git command-not-found ubuntu tmux pip sudo docker docker-compose gitignore maven kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/home/juanantonio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/Users/ju.perez/bin:/home/juanantonio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -76,3 +78,38 @@ export PATH="/home/juanantonio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr
 
 # User specific aliases and functions
 export ANSIBLE_HOSTS=/etc/ansible/hosts
+
+# Alias for salt keys
+#alias sk="ssh salt.test.foo sudo salt-key"
+# Show host that contain the first parameter
+function sk() { ssh salt.test.foo "sudo salt-key|grep -i '$1'"; }
+#Enter in the first host that match with the parameter
+function ssk() { ssh $(sk "$1"|head -n1); }
+
+# Aparition
+#export MONGODB_URI_APARITION=mongodb://127.0.0.1:27017/machines?replicaSet=gendbmongodb
+#export MONGODB_URI_APARITION=mongodb://localhost:27017/
+export MONGODB_URI_APARITION=mongodb://gen-db-mongodb-data01.gtl.test.foo:27017,gen-db-mongodb-data02.gtl.test.foo:27017/machines?replicaSet=gendbmongodb
+#function aparition() {
+#  docker run --rm -it --link some-mongo -e MONGODB_URI=${MONGODB_URI_APARITION} docker-registry.test.foo/aparition:latest aparition ${@};
+#}
+function aparition() {
+  docker run --rm -it -e MONGODB_URI=${MONGODB_URI_APARITION} docker-registry.test.foo/aparition:latest aparition ${@};
+}
+
+#Azure CLI autocompletation
+autoload -U +X bashcompinit && bashcompinit
+source /usr/local/etc/bash_completion.d/az
+
+# Function to put your work time in personio
+function time_logger(){
+
+  if [ -z $1 ]; then
+    echo "Putting hours for ->" $(date +"%Y-%m-%d");
+    ~/projects/personio-timelogger/client/venv/bin/python ~/projects/personio-timelogger/client/personio-timelogger.py $(date +"%Y-%m-%d");
+  else
+    echo "Putting hours for ->" ${@}
+    ~/projects/personio-timelogger/client/venv/bin/python ~/projects/personio-timelogger/client/personio-timelogger.py $1;
+  fi
+
+}
