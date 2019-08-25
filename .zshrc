@@ -76,8 +76,11 @@ export PATH="/Users/ju.perez/bin:/home/juanantonio/bin:/usr/local/sbin:/usr/loca
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# binding to accept the autosuggest
-bindkey '^⇧ ' autosuggest-accept
+# binding to accept the autosuggest (shift+tab)
+bindkey '^[[Z' autosuggest-accept
+# Ctrl+space: print Git status
+bindkey -s '^ ' ' git status --short^M'
+
 
 # User specific aliases and functions
 export ANSIBLE_HOSTS=/etc/ansible/hosts
